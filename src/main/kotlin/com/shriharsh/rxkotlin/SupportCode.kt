@@ -1,5 +1,6 @@
 package com.shriharsh.rxkotlin
 
+import io.reactivex.subjects.BehaviorSubject
 import java.util.*
 
 fun exampleOf(description: String, action: () -> Unit) {
@@ -87,3 +88,50 @@ val tomatometerRatings = listOf(
 enum class DroidEnum {
   C3PO, R2D2
 }
+
+const val mapEpisodeI = "Episode I - The Phantom Menace"
+const val mapEpisodeII = "Episode II - Attack of the Clones"
+const val mapEpisodeIII = "Episode III - Revenge of the Sith"
+const val mapEpisodeIV = "Episode IV - A New Hope"
+const val mapEpisodeV = "Episode V - The Empire Strikes Back"
+const val mapEpisodeVI = "Episode VI - Return Of The Jedi"
+const val mapEpisodeVII = "Episode VII - The Force Awakens"
+const val mapEpisodeVIII = "Episode VIII - The Last Jedi"
+const val mapEpisodeIX = "Episode IX - Episode IX"
+
+val episodes = listOf(mapEpisodeI, mapEpisodeII, mapEpisodeIII, mapEpisodeIV, mapEpisodeV, mapEpisodeVI, mapEpisodeVII, mapEpisodeVIII, mapEpisodeIX)
+
+fun String.romanNumeralIntValue(): Int {
+
+  val lookup: Map<Char, Int> = mapOf(
+    Pair('I', 1),
+    Pair('V', 5),
+    Pair('X', 10),
+    Pair('L', 50),
+    Pair('C', 100),
+    Pair('D', 500),
+    Pair('M', 1000)
+  )
+
+  fun accumulate(currentValue: Int?, lastValueAndTotal: Pair<Int, Int>): Pair<Int, Int> {
+    if (currentValue == null) return lastValueAndTotal
+    val mult = if (lastValueAndTotal.first > currentValue) -1 else 1
+    return Pair(currentValue, lastValueAndTotal.second + (mult * currentValue))
+  }
+
+  return this.map { lookup[it] }
+    .foldRight(Pair(0, 0), ::accumulate)
+    .second
+}
+
+data class Jedi(val rank: BehaviorSubject<JediRank>)
+
+enum class JediRank(val value: String) {
+  Youngling("Youngling"),
+  Padawan("Padawan"),
+  JediKnight("Jedi Knight"),
+  JediMaster("Jedi Master"),
+  JediGrandMaster("Jedi Grand Master")
+}
+
+const val sentinel = -1
