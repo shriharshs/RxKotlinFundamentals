@@ -61,3 +61,29 @@ fun IntRange.random() = Random().nextInt(endInclusive - start) +  start
 sealed class HandError: Throwable() {
   class Busted: HandError()
 }
+
+const val landOfDroids = "Land of Droids"
+const val wookieWorld = "Wookie World"
+const val detours = "Detours"
+
+const val mayTheOdds = "And may the odds be ever in your favor"
+const val liveLongAndProsper = "Live long and prosper"
+const val mayTheForce = "May the Force be with you"
+
+data class Movie(val title: String, val rating: Int)
+
+val movieEpisodeI = Movie("The Phantom Menace", 55)
+val movieEpisodeII = Movie("Attack of the Clones", 66)
+val movieEpisodeIII = Movie("Revenge of the Sith", 79)
+val movieEogueOne = Movie("Rogue One", 85)
+val movieEpisodeIV = Movie("A New Hope", 93)
+val movieEpisodeV = Movie("The Empire Strikes Back", 94)
+val movieEpisodeVI = Movie("Return Of The Jedi", 80)
+val movieEpisodeVII = Movie("The Force Awakens", 93)
+val movieEpisodeVIII = Movie("The Last Jedi", 91)
+val tomatometerRatings = listOf(
+  movieEpisodeI, movieEpisodeII, movieEpisodeIII, movieEogueOne, movieEpisodeIV, movieEpisodeV, movieEpisodeVI, movieEpisodeVII, movieEpisodeVIII)
+
+enum class DroidEnum {
+  C3PO, R2D2
+}
